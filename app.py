@@ -43,14 +43,11 @@ def index():
         pred3 = model3.predict([[float(lastrow[0]),float(lastrow[1]),float(lastrow[2])]])
         pred4 = model4.predict([[float(lastrow[0]),float(lastrow[1]),float(lastrow[2])]])
         pred5 = model5.predict([[float(lastrow[0]),float(lastrow[1]),float(lastrow[2])]])
-        res = "Logistic Regression: " + str(getDefault(pred[0])) + "." + 
-        "Decision Tree: " + str(getDefault(pred[0])) + "." +
-        "Logistic Regression: " + str(getDefault(pred[0])) + "." + 
-        "Logistic Regression: " + str(getDefault(pred[0])) + "." + 
-        "Logistic Regression: " + str(getDefault(pred[0])) + "." +
-        return (render_template("index.html",result=pred))
+        res = [str(getDefault(pred[0])),str(getDefault(pred[2])),str(getDefault(pred[3])),str(getDefault(pred[4])),str(getDefault(pred[5]))]
+        
+        return (render_template("index.html",result=res))
     else:
-        return (render_template("index.html",result="2"))
+        return (render_template("index.html",result=[]))
     
 if __name__ == "__main__":
     app.run()
