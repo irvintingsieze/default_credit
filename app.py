@@ -12,13 +12,11 @@ import pandas as pd
 from scipy import stats
 import numpy as np
 
-@app.route("/",methods = ["GET","POST"])
-
 def getDefault(i):
-    return "default" if 1 else "no default"
+    return "Default" if i else "No Default"
 
+@app.route("/",methods = ["GET","POST"])
 def index():
-    
     if request.method == "POST":
         df = pd.read_csv("Credit Card Default II (balance).csv")
         dfnew = df[df["age"]>0]
@@ -43,30 +41,14 @@ def index():
         pred3 = model3.predict([[float(lastrow[0]),float(lastrow[1]),float(lastrow[2])]])
         pred4 = model4.predict([[float(lastrow[0]),float(lastrow[1]),float(lastrow[2])]])
         pred5 = model5.predict([[float(lastrow[0]),float(lastrow[1]),float(lastrow[2])]])
-        res = [str(getDefault(pred[0])),str(getDefault(pred[2])),str(getDefault(pred[3])),str(getDefault(pred[4])),str(getDefault(pred[5]))]
+        res = [str(getDefault(pred[0])),str(getDefault(pred2[0])),str(getDefault(pred3[0])),str(getDefault(pred4[0])),str(getDefault(pred5[0]))]
         
         return (render_template("index.html",result=res))
     else:
         return (render_template("index.html",result=[]))
-    
+  
 if __name__ == "__main__":
     app.run()
-
-
-# In[ ]:
-
-
-
-
-
-# In[ ]:
-
-
-
-
-
-# In[ ]:
-
 
 
 
